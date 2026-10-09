@@ -8,7 +8,8 @@ import argparse as arg
 
 parser = arg.ArgumentParser(prog = "FDF_Creator", formatter_class = arg.RawDescriptionHelpFormatter, description = "Program used to make the k point test", epilog= """Some Examples: """)
 
-parser.add_argument("-k", dest = "k_points", nargs ="+", type=int, required = False, metavar = "k_points", help = "k_points values (in order)")
+parser.add_argument("-l", dest = "label", type = str, required = True, help = "Label of file")
+parser.add_argument("-k", dest = "k_points", nargs ="+", type=int, required = True, metavar = "k_points", help = "k_points values (in order)")
 
 args = parser.parse_args()
 
@@ -18,7 +19,6 @@ label_name = args.label
 
 kp_values = args.k_points
 
-label_name = "gf"
 fdf_file = label_name + ".fdf"
 
 path_psml = "~/Siesta_Standart_psml/Scalar_Relativistic/"

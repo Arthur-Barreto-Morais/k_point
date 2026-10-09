@@ -10,6 +10,7 @@ parser = arg.ArgumentParser(prog = "FDF_Creator", formatter_class = arg.RawDescr
 
 parser.add_argument("-l", dest = "label", type = str, required = True, help = "Label of file")
 parser.add_argument("-k", dest = "k_points", nargs ="+", type=int, required = True, metavar = "k_points", help = "k_points values (in order)")
+parser.add_argument("-n", dest = "n_proc", type = str, required = True, help = "Number of Procesors")
 
 args = parser.parse_args()
 
@@ -25,7 +26,7 @@ path_psml = "~/Siesta_Standart_psml/Scalar_Relativistic/"
 
 cell_type = "2D"
 
-n_proc = 6
+n_proc = args.n_proc
 
 #######################################################################################################################################################################
 

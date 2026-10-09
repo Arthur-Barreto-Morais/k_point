@@ -32,7 +32,8 @@ def kp_adjust(fdf_file, kp):
         if "%block kgrid_Monkhorst_Pack" in info:
             in_block = True
             new_lines.append(info)
-            new_lines.append(kp_block(cell_type, kp))
+            block = kp_block(cell_type, kp)
+            new_lines.extend(block.splitlines()[1:-1])
             continue
 
         if "%endblock kgrid_Monkhorst_Pack" in info:

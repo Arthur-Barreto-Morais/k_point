@@ -3,7 +3,7 @@ import os
 import shutil
 import subprocess
 
-kp_values = [1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+kp_values = [1, 2, 3, 4, 6, 8, 10, 20]
 
 label_name = "gf"
 fdf_file = label_name + ".fdf"

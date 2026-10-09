@@ -1,7 +1,7 @@
 import chemical
 import os
 import shutil
-
+import subprocess
 kp_values = [1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 
 label_name = "gf"
@@ -11,9 +11,7 @@ path_psml = "~/Siesta_Standart_psml/Scalar_Relativistic/"
 
 cell_type = "2D"
 
-os.getcwd()
-
-dir_kp = 'kp'
+n_proc = 10
 
 #######################################################################################################################################################################
 
@@ -37,7 +35,7 @@ def kp_adjust(fdf_file, kp):
         if "DM.UseSaveDM" in info:
             new_lines.append("DM.UseSaveDM False")
             continue
-        
+
         if "%block kgrid_Monkhorst_Pack" in info:
             in_block = True
             new_lines.append(info)
@@ -75,6 +73,10 @@ def kp_block(cell_type, kp):
 
 #######################################################################################################################################################################
 
+os.getcwd()
+
+dir_kp = 'kp'
+
 if os.path.exists(dir_kp):
     shutil.rmtree(dir_kp)
 os.makedirs(dir_kp, exist_ok = True)
@@ -92,3 +94,19 @@ for i, kp in enumerate(kp_values):
 
     kp_adjust(fdf_file,kp)
 
+    os.environ["OMP_NUM_THREADS"] = "1"
+
+    command = ["/usr/bin/mpirun", "-np", str(n_proc), "/home/usr/bin/siesta-5.0.0/MPICH2/bin/siesta"]
+
+    fdf_aux = os.path.join(dir_aux,label_name + ".fdf")
+    out_aux = os.path.join(dir_aux,label_name + ".out")
+        
+    with open(out_aux, 'w') as f_out, open(fdf_aux, 'r') as f_in:
+        subprocess.run(
+            command,
+            cwd =dir_aux,
+            stdin =f_in,
+            stdout =f_out,
+            stderr =subprocess.STDOUT,
+            check =True
+                          )

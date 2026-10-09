@@ -18,7 +18,7 @@ dir_kp = 'kp'
 #######################################################################################################################################################################
 
 def kp_adjust(fdf_file, kp):
-    file_path = os.path.join(os.getcwd(), fdf_file)
+    file_path = os.path.join(dir_aux, fdf_file)
     
     in_block = False
 
@@ -61,7 +61,7 @@ def kp_block(cell_type, kp):
 %endblock kgrid_Monkhorst_Pack"""
     else:
         print("ERROR, Choose 2D or 3D")
-
+    return block
 
 #######################################################################################################################################################################
 

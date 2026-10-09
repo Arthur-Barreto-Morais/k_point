@@ -29,6 +29,14 @@ def kp_adjust(fdf_file, kp):
     in_block = False
 
     for info in line:
+
+        if "MD.UseSaveXV" in info:
+            new_lines.append("MD.UseSaveXV True")
+            continue
+
+        if "DM.UseSaveDM" in info:
+            new_lines.append("DM.UseSaveDM False")
+            continue
         if "%block kgrid_Monkhorst_Pack" in info:
             in_block = True
             new_lines.append(info)

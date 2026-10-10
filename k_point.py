@@ -122,7 +122,7 @@ for i, kp in enumerate(kp_values):
     command = ["/usr/bin/mpirun", "-np", str(n_proc), "/home/usr/bin/siesta-5.0.0/MPICH2/bin/siesta"]
 
     fdf_aux = os.path.join(dir_aux,label_name + ".fdf")
-    out_aux = os.path.join(dir_aux,label_name + ".out")
+    out_aux = os.path.join(dir_aux,"log.out")
         
     with open(out_aux, 'w') as f_out, open(fdf_aux, 'r') as f_in:
         subprocess.run(

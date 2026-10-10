@@ -43,6 +43,10 @@ def kp_adjust(fdf_file, kp):
 
     for info in line:
 
+        if "MD.Steps" in info:
+            new_lines.append("MD.Steps 0")
+            continue
+        
         if "MD.UseSaveXV" in info:
             new_lines.append("MD.UseSaveXV True")
             continue
